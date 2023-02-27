@@ -32,7 +32,6 @@ struct ListViewModifier: ViewModifier {
         .overlay(alignment: .trailing) { matchOverlay }
         .overlay(alignment: .trailing) {
             GeometryReader { geo in
-
                 if geo.size.height < defaultHeight {
                     Text("Container to short to display suggestion bar\nRequired: \(Int(defaultHeight)), Found: \(Int(geo.size.height))")
                         .font(.caption)
@@ -71,17 +70,16 @@ struct ListViewModifier: ViewModifier {
                 .onChanged { gesture in
                     handleGestureChange(gesture, in: geo)
                 }
-                .onEnded({ _ in
+                .onEnded { _ in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         container.matchValue(nil)
                         withAnimation {
                             response = nil
                         }
                     }
-                })
+                }
         }
     }
-
 }
 
 // MARK: - Private Methods

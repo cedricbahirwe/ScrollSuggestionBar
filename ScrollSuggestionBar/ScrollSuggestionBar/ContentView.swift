@@ -13,16 +13,14 @@ struct ContentView: View {
     var body: some View {
         VStack {
             List {
-                ForEach(phrases, id:\.self) { item in
-                    Text(item)
-                }
+                ForEach(phrases,
+                        id:\.self,
+                        content: Text.init)
             }
             .listSuggestions(container) { _ in }
             .listStyle(.grouped)
-//            .frame(height: 200)
         }
     }
-
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -30,17 +28,6 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
-extension List {
-    func listSuggestions(_ container: SuggestionContainer, match: @escaping (AnyHashable?) -> Void) -> some View {
-        ModifiedContent(content: self, modifier: ListViewModifier(container: container, match: match))
-    }
-
-    func scrollSuggestions(_ container: SuggestionContainer, match: @escaping (AnyHashable?) -> Void) -> some View {
-        ModifiedContent(content: self, modifier: ListViewModifier(container: container, match: match))
-    }
-}
-
 
 private let phrases = [
     "After the long day, I need to take an afternoon nap.",

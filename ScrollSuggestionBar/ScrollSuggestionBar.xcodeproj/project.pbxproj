@@ -13,6 +13,7 @@
 		CB18BD3429ACBEA700A7B45C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB18BD3329ACBEA700A7B45C /* Preview Assets.xcassets */; };
 		CB18BD3D29ACBF2900A7B45C /* SuggestionContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB18BD3C29ACBF2900A7B45C /* SuggestionContainer.swift */; };
 		CB18BD3F29ACBF4F00A7B45C /* ListViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB18BD3E29ACBF4F00A7B45C /* ListViewModifier.swift */; };
+		CB18BD4129ACCD3C00A7B45C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB18BD4029ACCD3C00A7B45C /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		CB18BD3329ACBEA700A7B45C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CB18BD3C29ACBF2900A7B45C /* SuggestionContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionContainer.swift; sourceTree = "<group>"; };
 		CB18BD3E29ACBF4F00A7B45C /* ListViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModifier.swift; sourceTree = "<group>"; };
+		CB18BD4029ACCD3C00A7B45C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				CB18BD2E29ACBEA500A7B45C /* ContentView.swift */,
 				CB18BD3C29ACBF2900A7B45C /* SuggestionContainer.swift */,
 				CB18BD3E29ACBF4F00A7B45C /* ListViewModifier.swift */,
+				CB18BD4029ACCD3C00A7B45C /* Extensions.swift */,
 				CB18BD3029ACBEA700A7B45C /* Assets.xcassets */,
 				CB18BD3229ACBEA700A7B45C /* Preview Content */,
 			);
@@ -143,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB18BD4129ACCD3C00A7B45C /* Extensions.swift in Sources */,
 				CB18BD2F29ACBEA500A7B45C /* ContentView.swift in Sources */,
 				CB18BD3F29ACBF4F00A7B45C /* ListViewModifier.swift in Sources */,
 				CB18BD2D29ACBEA500A7B45C /* ScrollSuggestionBarApp.swift in Sources */,
