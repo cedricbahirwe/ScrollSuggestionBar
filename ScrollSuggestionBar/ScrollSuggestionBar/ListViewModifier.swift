@@ -18,7 +18,8 @@ struct ListViewModifier: ViewModifier {
 
     @State private var lastLocation: CGPoint = .zero
 
-    private let defaultTrailingPadding: CGFloat = 0
+    private let defaultWidth: CGFloat = 20.0
+    private let defaultHeight: CGFloat = 360.0
 
     func body(content: Content) -> some View {
         ScrollViewReader { proxy in
@@ -28,53 +29,39 @@ struct ListViewModifier: ViewModifier {
                     handleValueChange(newValue, proxy: proxy)
                 }
         }
-        .overlay(alignment: .trailing) {
-            matchOverlay
-        }
+        .overlay(alignment: .trailing) { matchOverlay }
         .overlay(alignment: .trailing) {
             GeometryReader { geo in
-                VStack(spacing: 0) {
-                    ForEach(alphabets, id: \.self) { item in
-                        Text(item)
-                            .textCase(.uppercase)
-                            .font(.caption.weight(.medium))
-                            .minimumScaleFactor(0.5)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .foregroundColor(response==item ? .red : .blue)
-                            .scaleEffect(response==item ? 1.7 : 1)
-                    }
-                }
-                .overlay(content: {
-                    VStack {
-                        Text(geo.size.height.description)
-                        Text(geo.size.width.description)
-                    }
-                    .font(.largeTitle)
-                })
-                .frame(width: 200, height: getGeoHeight(geo))
-                .background(Color(uiColor: .secondarySystemGroupedBackground))
-                .contentShape(Rectangle())
-                .gesture(
-                    drageGesture(geo)
-                )
 
-//                .gesture(
-//                    DragGesture()
-//                        .onChanged { gesture in
-//                            handleGestureChange(gesture, in: geo)
-//                        }
-//                        .onEnded({ _ in
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                                self.container.matchValue(nil)
-//                                withAnimation {
-//                                    self.response = nil
-//                                }
-//                            }
-//                        })
-//                )
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
+                if geo.size.height < defaultHeight {
+                    Text("Container to short to display suggestion bar\nRequired: \(Int(defaultHeight)), Found: \(Int(geo.size.height))")
+                        .font(.caption)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.red)
+                        .padding(10)
+                        .background(.ultraThickMaterial)
+                        .minimumScaleFactor(0.5)
+                        .clipShape(Capsule())
+                        .shadow(radius: 1)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    VStack(spacing: 0) {
+                        ForEach(alphabets, id: \.self) { item in
+                            Text(item)
+                                .textCase(.uppercase)
+                                .font(.caption2.weight(.semibold))
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .foregroundColor(response==item ? .red : .blue)
+                                .scaleEffect(response==item ? 1.7 : 1)
+                        }
+                    }
+                    .frame(width: defaultWidth, height: defaultHeight)
+                    .background(Color(uiColor: .secondarySystemGroupedBackground))
+                    .contentShape(Rectangle())
+                    .gesture(drageGesture(geo))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
+                }
             }
-            .padding(.trailing, defaultTrailingPadding)
         }
     }
 
@@ -100,7 +87,7 @@ struct ListViewModifier: ViewModifier {
 // MARK: - Private Methods
 private extension ListViewModifier {
     func getGeoHeight(_ geo: GeometryProxy) -> CGFloat {
-        geo.size.height*0.5
+        return geo.size.height*0.5
     }
 
     func handleValueChange<V: Equatable>(_ newValue: V, proxy: ScrollViewProxy) {
@@ -160,9 +147,9 @@ private extension ListViewModifier {
                     .cornerRadius(5)
                     .position(x: 0, y: lastLocation.y)
                     .offset(x: 25)
-                    .frame(width: 50, height: getGeoHeight(geo))
+                    .frame(width: 50, height: defaultHeight)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
-                    .padding(.trailing, 25 + defaultTrailingPadding)
+                    .padding(.trailing, 25)
             }
         }
     }
